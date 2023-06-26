@@ -1,4 +1,4 @@
-pub trait Iterator {
+pub trait MyIterator {
     type Item;
 
     fn next(&mut self) -> Option<Self::Item>;
@@ -106,14 +106,12 @@ fn calling_next_directly() {
 
 #[test]
 fn using_other_iterator_trait_methods() {
-    assert_eq!(
-        Counter::new()
-            .zip(Counter::new().skip(1))
-            .map(|(a, b)| a * b)
-            .filter(|x| x % 3 == 0)
-            .sum(),
-        18
-    );
+    let sum: u32 = Counter::new()
+        .zip(Counter::new().skip(1))
+        .map(|(a, b)| a * b)
+        .filter(|x| x % 3 == 0)
+        .sum();
+    assert_eq!(18, sum);
 }
 
 fn main() {
